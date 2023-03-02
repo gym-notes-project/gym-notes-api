@@ -25,7 +25,8 @@ class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
 
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    
+
+
 class UserWorksheets(APIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated, IsAccountOwner]
@@ -35,13 +36,13 @@ class UserWorksheets(APIView):
         training = Training_day.objects.get(id=training_day_id)
         training_serializer = Training_daySerializer(training)
         training_data = training_serializer.data
-        
+
         return_data = training_data
-        
+
         exercises = Exercise.objects.filter(training_day_id=training_data["id"])
         exercises_serializer = ExerciseSerializer(exercises, many=True)
         exercises_data = json.loads(json.dumps(exercises_serializer.data))
-        
+
         return_data["exercises"] = exercises_data
         for exercise in return_data["exercises"]:
             series = Serie.objects.filter(exercise_id=exercise["id"])

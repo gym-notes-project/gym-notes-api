@@ -5,10 +5,4 @@ from .models import Serie
 class SerieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Serie
-        fields = [
-            "id",
-            "name",
-            "weigth",
-            "reps",
-            "exercise_id"
-        ]
+        fields = ["id", "name", "weigth", "reps", "exercise_id"]

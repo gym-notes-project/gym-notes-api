@@ -12,16 +12,17 @@ class TrainingView(generics.ListCreateAPIView):
 
     queryset = Training_day.objects.all()
     serializer_class = Training_daySerializer
-    
+
     def get_queryset(self):
         return Training_day.objects.filter(user_id=self.request.user)
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
+
 class DetailTrainingView(generics.RetrieveUpdateDestroyAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticatedOrReadOnly, IsAdminOrTrainingOwner]
-    
+
     queryset = Training_day.objects.all()
     serializer_class = Training_daySerializer
