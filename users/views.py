@@ -30,7 +30,7 @@ class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
 class UserWorksheets(APIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated, IsAccountOwner]
-
+    
     def get(self, req: Request, training_day_id: int) -> Response:
         training_day_id = self.kwargs["training_day_id"]
         training = Training_day.objects.get(id=training_day_id)
